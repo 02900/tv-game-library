@@ -1,18 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btn_switch_to_hdmi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Switch to HDMI"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="35dp"
-        android:onClick="switchToHDMI"
+        android:text="Start"
+        android:id="@+id/btn_switch_to_hdmi"
+        android:onClick="initGameLibrary"
         />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset DS4"
+        android:id="@+id/btn_reset_ds4"
+        android:onClick="resetDS4"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Custom event"
+        android:id="@+id/editText1"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send Custom Event"
+        android:id="@+id/button1"
+        android:onClick="sendCustomEvent"
+        />
+
+</LinearLayout>
