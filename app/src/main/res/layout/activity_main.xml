@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/btn_switch_to_hdmi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Switch to HDMI"
+        tools:layout_editor_absoluteX="42dp"
+        tools:layout_editor_absoluteY="35dp"
+        android:onClick="switchToHDMI"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
