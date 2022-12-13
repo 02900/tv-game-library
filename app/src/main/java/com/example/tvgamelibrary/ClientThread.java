@@ -13,7 +13,7 @@ class ClientThread implements Runnable {
     private Socket client;
     private PrintWriter printwriter;
 
-    public static final int PORT = 9;
+    public static final int PORT = 4444;
 
     ClientThread(String ip, String message) {
         this.ip = ip;

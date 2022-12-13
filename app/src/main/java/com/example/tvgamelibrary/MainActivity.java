@@ -8,6 +8,7 @@ import android.media.tv.TvInputInfo;
 import android.media.tv.TvInputManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 
@@ -28,6 +29,13 @@ public class MainActivity extends Activity
     public void WakeOnLAN(View view) {
         sendEvent("Wake On LAN");
         new Thread(new WakeOnLANThread(broadcast, mac)).start();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                initGameLibrary(view);
+            }
+        }, 1000);
     }
 
     public void initGameLibrary(View view) {
