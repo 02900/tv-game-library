@@ -25,6 +25,14 @@ tools:context=".MainActivity">
         android:onClick="resetDS4"
         />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wake On LAN"
+        android:id="@+id/btn_wake_on_lan"
+        android:onClick="WakeOnLAN"
+        />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

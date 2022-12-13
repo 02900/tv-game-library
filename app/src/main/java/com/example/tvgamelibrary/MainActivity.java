@@ -9,23 +9,25 @@ import android.media.tv.TvInputManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import java.util.List;
 
-import android.widget.EditText;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.Socket;
-
 public class MainActivity extends Activity
 {
-    private Socket client;
-    private PrintWriter printwriter;
     private EditText textField;
+    private static String ip = "192.168.1.77";
+    private static String broadcast = "192.168.1.255";
+    private static String mac = "F8:75:A4:7E:23:2A";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    public void WakeOnLAN(View view) {
+        sendEvent("Wake On LAN");
+        new Thread(new WakeOnLANThread(broadcast, mac)).start();
     }
 
     public void initGameLibrary(View view) {
@@ -60,7 +62,7 @@ public class MainActivity extends Activity
                 TvInputInfo inputInfo = a.get(i);
                 String inputLabel = inputInfo.loadLabel(context).toString();
                 if (inputLabel.equals("HDMI 1")) {
-                    sendEvent("HDMI 1 found!");
+                    // sendEvent("HDMI 1 found!");
 
                     Uri inputInfoIdUri =
                             TvContract.buildChannelUriForPassthroughInput(inputInfo.getId());
@@ -76,41 +78,10 @@ public class MainActivity extends Activity
             }
         }
 
-        sendEvent(inputs);
+        // sendEvent(inputs);
     }
 
     private void sendEvent(String event) {
-        new Thread(new ClientThread(event)).start();
-    }
-
-    // source: https://www.geeksforgeeks.org/how-to-communicate-with-pc-using-android/
-    // the ClientThread class performs
-    // the networking operations
-    class ClientThread implements Runnable {
-        private final String message;
-
-        ClientThread(String message) {
-            this.message = message;
-        }
-
-        @Override
-        public void run() {
-            try {
-                // the IP and port should be correct to have a connection established
-                // Creates a stream socket and connects it to the specified port number on the named host.
-                client = new Socket("192.168.1.77", 4444); // connect to server
-                printwriter = new PrintWriter(client.getOutputStream(),true);
-                printwriter.write(message); // write the message to output stream
-
-                printwriter.flush();
-                printwriter.close();
-
-                // closing the connection
-                client.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        new Thread(new ClientThread(ip, event)).start();
     }
 }
