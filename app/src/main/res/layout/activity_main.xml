@@ -1,50 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-tools:context=".MainActivity">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/background"
+    tools:context=".MainActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start"
-        android:id="@+id/btn_switch_to_hdmi"
-        android:onClick="initGameLibrary"
-        />
+    <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/width_match_parent_max_width"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/background">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reset DS4"
-        android:id="@+id/btn_reset_ds4"
-        android:onClick="resetDS4"
-        />
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/Button.White"
+            android:textColor="#000"
+            android:text="Play"
+            android:id="@+id/btn_wake_on_lan"
+            android:onClick="WakeOnLAN"
+            />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Wake On LAN"
-        android:id="@+id/btn_wake_on_lan"
-        android:onClick="WakeOnLAN"
-        />
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/Button.White"
+            android:textColor="#000"
+            android:text="Reset DS4"
+            android:id="@+id/btn_reset_ds4"
+            android:onClick="resetDS4"
+            />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Custom event"
-        android:id="@+id/editText1"/>
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Event"
+            android:id="@+id/editText1"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Send Custom Event"
-        android:id="@+id/button1"
-        android:onClick="sendCustomEvent"
-        />
-
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/Button.White"
+            android:textColor="#000"
+            android:text="Send Custom Event"
+            android:id="@+id/button1"
+            android:onClick="sendCustomEvent"
+            />
+    </LinearLayout>
 </LinearLayout>

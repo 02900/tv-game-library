@@ -1,4 +1,11 @@
 <resources>
-
     <style name="Theme.TVGameLibrary" parent="@style/Theme.Leanback" />
+
+    <style name="Button.White" parent="ThemeOverlay.AppCompat">
+        <item name="colorAccent">@android:color/white</item>
+    </style>
+
+    <style name="width_match_parent_max_width">
+        <item name="android:layout_width">200dp</item>
+    </style>
 </resources>
