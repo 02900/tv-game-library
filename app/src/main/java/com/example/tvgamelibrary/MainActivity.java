@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MainActivity extends Activity
 {
-    private EditText textField;
+    // private EditText textField;
     private static String ip = "192.168.1.77";
     private static String broadcast = "192.168.1.255";
     private static String mac = "F8:75:A4:7E:23:2A";
@@ -26,52 +26,57 @@ public class MainActivity extends Activity
         setContentView(R.layout.activity_main);
     }
 
-    public void WakeOnLAN(View view) {
-        sendEvent("Wake On LAN");
+    public void play(View view) {
+        sendEvent("WAKE_ON_LAN");
         new Thread(new WakeOnLANThread(broadcast, mac)).start();
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                initGameLibrary(view);
+                sendEvent("PLAY");
             }
         }, 1000);
     }
 
-    public void initGameLibrary(View view) {
-        sendEvent("init game library");
-        switchToHDMI(view);
+    public void sendResetDS4Event(View view) {
+        sendEvent("RESET_DS4");
+        switchToHDMI();
     }
 
-    public void resetDS4(View view) {
-        sendEvent("reset DS4");
+    public void sendSleepEvent (View view) {
+        sendEvent("SLEEP");
     }
 
-    public void sendCustomEvent(View view) {
+    public void sendRestartEvent (View view) {
+        sendEvent("RESTART");
+        switchToHDMI();
+    }
+
+    /* public void sendCustomEvent(View view) {
         if (textField == null)
             textField = (EditText) findViewById(R.id.editText1);
 
         String event = textField.getText().toString();
-        if (!event.isEmpty())
+        if (!event.isEmpty()) {
             sendEvent(event);
+            switchToHDMI();
+        }
+    }*/
+
+    private void sendEvent(String event) {
+        new Thread(new ClientThread(ip, event)).start();
     }
 
-    private void switchToHDMI(View view) {
+    private void switchToHDMI() {
         Context context = this.getApplicationContext();
-        TvInputManager tim = (TvInputManager) context.getSystemService(Context.TV_INPUT_SERVICE);
-        List<TvInputInfo> a = tim.getTvInputList();
-        String inputs = "No information was found about the inputs";
+        TvInputManager tvInputManager = (TvInputManager) context.getSystemService(Context.TV_INPUT_SERVICE);
+        List<TvInputInfo> tvInputList = tvInputManager.getTvInputList();
 
-        if (!a.isEmpty()) {
-            inputs = "";
-
-            for(int i = 0; i<a.size(); i++) {
-
-                TvInputInfo inputInfo = a.get(i);
+        if (!tvInputList.isEmpty()) {
+            for(int i = 0; i<tvInputList.size(); i++) {
+                TvInputInfo inputInfo = tvInputList.get(i);
                 String inputLabel = inputInfo.loadLabel(context).toString();
                 if (inputLabel.equals("HDMI 1")) {
-                    // sendEvent("HDMI 1 found!");
-
                     Uri inputInfoIdUri =
                             TvContract.buildChannelUriForPassthroughInput(inputInfo.getId());
 
@@ -81,15 +86,7 @@ public class MainActivity extends Activity
                     context.startActivity(intent);
                     break;
                 }
-
-                inputs += inputLabel + ",  ";
             }
         }
-
-        // sendEvent(inputs);
-    }
-
-    private void sendEvent(String event) {
-        new Thread(new ClientThread(ip, event)).start();
     }
 }

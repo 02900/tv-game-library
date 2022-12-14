@@ -28,7 +28,7 @@
             android:textColor="#000"
             android:text="Play"
             android:id="@+id/btn_wake_on_lan"
-            android:onClick="WakeOnLAN"
+            android:onClick="play"
             />
 
         <Button
@@ -38,10 +38,30 @@
             android:textColor="#000"
             android:text="Reset DS4"
             android:id="@+id/btn_reset_ds4"
-            android:onClick="resetDS4"
+            android:onClick="sendResetDS4Event"
             />
 
-        <EditText
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/Button.White"
+            android:textColor="#000"
+            android:text="Sleep"
+            android:id="@+id/btn_sleep"
+            android:onClick="sendSleepEvent"
+            />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/Button.White"
+            android:textColor="#000"
+            android:text="Restart"
+            android:id="@+id/btn_restart"
+            android:onClick="sendRestartEvent"
+            />
+
+<!--        <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:hint="Event"
@@ -55,6 +75,6 @@
             android:text="Send Custom Event"
             android:id="@+id/button1"
             android:onClick="sendCustomEvent"
-            />
+            />-->
     </LinearLayout>
 </LinearLayout>
